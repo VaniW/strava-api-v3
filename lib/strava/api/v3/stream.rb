@@ -15,8 +15,10 @@ module Strava::Api::V3
     #
     # @return an array of unordered stream objects
     def retrieve_activity_streams(id, types, args = {}, options = {}, &block)
+      args.merge!(keys: types)
+      args.merge!(key_by_type: " ")
       # Fetches the connections for given object.
-      api_call("activities/#{id}/streams/#{types}", args, 'get', options, &block)
+      api_call("activities/#{id}/streams", args, 'get', options, &block)
     end
 
     # Fetch information about a subset of the activity streams that correspond to that effort
